@@ -9,6 +9,7 @@ int main()
                         { INF, INF, INF, 0 } };
     int n=graph.size();
     vector<vector<int>> dist=graph;
+    //Here K will act as intermediate to check for the shortest path.Where we will loop through all the possible values .
     for(int k=0;k<n;k++)
     {
         for(int i=0;i<n;i++)
