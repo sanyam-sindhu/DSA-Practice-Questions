@@ -1,2 +1,2 @@
-# DSAGraph
+# DSAQuestions
 Practice Code  using C++.
