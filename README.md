@@ -1,2 +1,2 @@
 # DSAQuestions
-Practice Code  using C++.
+Data Structure and Algorithms Practice Code coded in C++ Language.
