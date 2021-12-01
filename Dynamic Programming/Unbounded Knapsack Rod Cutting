@@ -1,0 +1,23 @@
+#include <bits/stdc++.h>
+using namespace std;
+int rod(int price[],int n)
+{
+    int val[n+1];
+    val[0]=0;
+    for(int i=1;i<=n;i++)
+    {
+        int max_val=INT_MIN;
+        for(j=0;j<i;j++)
+        {
+            max_val=max(max_val,price[j]+val[i-j-1])
+        }
+    }
+}
+int main()
+{
+    int arr[] = {1, 5, 8, 9, 10, 17, 17, 20};
+    int size = sizeof(arr)/sizeof(arr[0]);
+    
+    
+}
+#recursion solution
