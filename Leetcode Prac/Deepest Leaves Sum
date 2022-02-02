@@ -1,0 +1,28 @@
+class Solution {
+public:
+    int sum=0;
+    int maxDepth(TreeNode* root) {
+        if (root == NULL) {
+        return 0;
+      }
+      return max(1 + maxDepth(root -> left), 1 + maxDepth(root -> right));
+    }
+    
+    void findSum(TreeNode* root,int maxdepth,int currdepth){
+        if(root==NULL)
+            return ;
+        
+        if(currdepth==maxdepth)
+            sum+=root->val;
+        
+        findSum(root->left,maxdepth,currdepth+1);
+        findSum(root->right,maxdepth,currdepth+1);
+    }
+    
+    int deepestLeavesSum(TreeNode* root) {
+        int depth = maxDepth(root);
+        
+        findSum(root,depth,1);
+        return sum;
+    }
+};
