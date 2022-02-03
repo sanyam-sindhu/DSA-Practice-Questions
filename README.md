@@ -1,2 +1,2 @@
 # DSAQuestions
-Data Structure and Algorithms Practice Codes. (C++ Language)
+Data Structure and Algorithms Practice Codes in C++ .
