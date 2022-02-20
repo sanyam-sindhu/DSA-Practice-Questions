@@ -1,0 +1,25 @@
+class Solution {
+public:
+    set<vector<int> >v1;
+    void allSubsets(vector<int> v,int i, vector<int> &nums ) {
+        if(i>=nums.size())
+            return;
+        v.push_back(nums[i]);
+        v1.insert(v);
+        allSubsets(v,i+1,nums);
+        v.pop_back();
+        allSubsets(v,i+1,nums);
+    }
+    vector<vector<int>> subsetsWithDup(vector<int>& nums) {
+        vector<int> v;
+        sort(nums.begin(), nums.end());
+        
+        vector<vector<int> >ans;
+        ans.push_back({});
+        allSubsets(v,0,nums);
+        for(auto x: v1) {
+            ans.push_back(x);
+        }
+        return ans;
+    }
+};
