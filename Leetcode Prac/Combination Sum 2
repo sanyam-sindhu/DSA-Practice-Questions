@@ -1,0 +1,28 @@
+class Solution {
+    public: 
+    void findCombination(int ind, int target, vector<int> &arr, set<vector<int>> &ans, vector<int>&ds) {
+        if(target==0) {
+            ans.insert(ds);
+            return;
+        }        
+        for(int i = ind;i<arr.size();i++) {
+            if(arr[i]>target) break; 
+            ds.push_back(arr[i]);
+            findCombination(i+1, target - arr[i], arr, ans, ds); 
+            ds.pop_back(); 
+        }
+    }
+public:
+    vector<vector<int>> combinationSum2(vector<int>& candidates, int target) {
+        sort(candidates.begin(), candidates.end());
+        set<vector<int>> ans; 
+        vector<int> ds; 
+        findCombination(0, target, candidates, ans, ds); 
+        vector<vector<int>> v;
+        for(auto i:ans)
+        {
+            v.push_back(i);
+}
+        return v; 
+    }
+};
