@@ -1,39 +1,25 @@
 class Solution {
 public:
-    void permute(string input, string output, vector<string> &ans){
-        if(input.length() == 0){
-            ans.push_back(output);
+    vector<string>ans;
+    
+    void solve(string& S ,string curr , int index){
+        if((int)curr.size()==((int)S.size())){
+            ans.push_back(curr);
             return;
         }
-        
-        string out1  = output;
-        string out2 = output;
-        
-        if(input[0] >= 'a' && input[0] <= 'z' || input[0] >= 'A' && input[0] <= 'Z'){
-            out1.push_back(tolower(input[0]));
-            out2.push_back(toupper(input[0]));
-            
-            input.erase(input.begin() + 0);
-            
-            permute(input,out1,ans);
-            permute(input,out2, ans);
-            return;
+        if(S[index]>='0' && S[index]<='9')
+            solve(S, curr+S[index], index+1);
+        else{
+            solve(S,curr+(char)(toupper(S[index])),index+1);
+            solve(S,curr+(char)(tolower(S[index])),index+1);
         }
-        else{ 
-            out1.push_back(input[0]);
-            input.erase(input.begin() + 0);
-            permute(input,out1,ans);
-            
-            return;
-        }
-        
-        
-        
+        return;
     }
-    vector<string> letterCasePermutation(string s) {
-        vector<string> ans;
-        permute(s,"", ans);
+    
+    vector<string> letterCasePermutation(string S) {
+        int n=S.size();
+        string curr="";
+        solve(S,curr,0);
         return ans;
     }
-
 };
