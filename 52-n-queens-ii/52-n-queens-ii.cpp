@@ -1,34 +1,43 @@
 class Solution {
 public:
-    int count;
-    vector<int> left,ud,ld;
-    void solve(int n, int col)
-    {
-        if(col==n)
-        {
-            count++;
+    int ans=0;
+     void solve(int col,vector<string> &board,vector<int> &leftRow,vector<int> &upperDiagonal,vector<int> &lowerDiagonal,int n){
+        if(col==n){
+            ans++;
             return;
         }
-        for(int row=0;row<n;row++)
-        {
-            if(left[row]==0 && ld[row+col]==0 && ud[n-1+col-row]==0)
-            {
-                left[row]=1;
-                ld[row+col]=1;
-                ud[n-1+col-row]=1;
-                solve(n,col+1);
-                left[row]=0;
-                ld[row+col]=0;
-                ud[n-1+col-row]=0;
+        for(int row=0;row<n;row++){
+    
+            
+            if(leftRow[row]==0 &&
+              upperDiagonal[row+col]==0 &&
+              lowerDiagonal[n-1+col-row]==0){
+                board[row][col]='Q';
+                leftRow[row]=1;
+                upperDiagonal[row+col]=1;
+                lowerDiagonal[n-1+col-row]=1;
+                
+                solve(col+1,board,leftRow,upperDiagonal,lowerDiagonal,n);
+               
+                board[row][col]='.';
+                leftRow[row]=0;
+                upperDiagonal[row+col]=0;
+                lowerDiagonal[n-1+col-row]=0;
             }
         }
     }
     int totalNQueens(int n) {
-        count=0;
-        left=vector<int>(n,0);
-        ud=vector<int>(2*n-1,0);
-        ld=vector<int>(2*n-1,0);
-        solve(n,0);
-        return count;
+        vector<string> board(n);
+        string s(n,'.');
+        for(int i=0;i<n;i++)
+        {
+            board[i]=s;
+        }
+        vector<int> leftRow(n,0),upperDiagonal(2*n-1,0),lowerDiagonal(2*n-1,0);
+        solve(0,board,leftRow,upperDiagonal,lowerDiagonal,n);
+            return ans;
+        
+        
+        
     }
 };
