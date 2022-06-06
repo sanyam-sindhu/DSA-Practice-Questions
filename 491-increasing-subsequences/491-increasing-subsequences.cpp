@@ -1,23 +1,41 @@
 class Solution {
 public:
-    void solve(int ind,vector<int>& nums,vector<int> &v,set<vector<int>> &st){
-        if(v.size()>=2){
-            st.insert(v);
+    set<vector<int>>s;
+    vector<vector<int>>v;
+    
+    void dfs(vector<int>nums,vector<int>temp,int i,int prev){
+        if(temp.size()>=2&& s.find(temp)==s.end()){
+            v.push_back(temp);
+            s.insert(temp);
         }
+        if(i==nums.size())
+          return;  
         
-        for(int i=ind;i<nums.size();i++){
-            if(v.size()==0 || v[v.size()-1]<=nums[i]){
-                v.push_back(nums[i]);
-                solve(i+1,nums,v,st);
-                v.pop_back();
-            }
+        if(nums[i]>=prev){
+            
+            temp.push_back(nums[i]);
+            
+            dfs(nums,temp,i+1,nums[i]);
+            
+            temp.pop_back();
+            
         }
-    }
+        dfs(nums,temp,i+1,prev);
+        
+        return;
+        
+        }
+    
+    
     vector<vector<int>> findSubsequences(vector<int>& nums) {
-        vector<int> v;
-        set<vector<int>> st;
-        solve(0,nums,v,st);
-        vector<vector<int>> ans(st.begin(),st.end());
-        return ans;
+        
+        
+        vector<int>temp;
+        
+        dfs(nums,temp,0,INT_MIN);        
+        
+        return v;
+        
+        
     }
 };
