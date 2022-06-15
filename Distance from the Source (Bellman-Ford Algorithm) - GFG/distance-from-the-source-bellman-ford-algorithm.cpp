@@ -13,18 +13,19 @@ class Solution{
     *   V: number of vertices
     */
     vector <int> bellman_ford(int V, vector<vector<int>> adj, int S) {
-        vector<int> dist(V,100000000);
-        dist[S]=0;
-        for(int i=1;i<=V-1;i++)
+        vector<int> dis(V,100000000);
+        dis[S]=0;
+        for(int i=1;i<V;i++)
         {
+            
             for(auto it:adj)
             {
-                if(dist[it[0]]+it[2]<dist[it[1]])
-                    dist[it[1]]=it[2]+dist[it[0]];
+                if(dis[it[1]]>it[2]+dis[it[0]])
+                    dis[it[1]]=it[2]+dis[it[0]];
+                    
             }
-            
         }
-        return dist;
+        return dis;
         // Code here
     }
 };
