@@ -2,45 +2,54 @@ class Solution {
 public:
     int maxDistance(vector<vector<int>>& grid) {
         queue<pair<int,int>> q;
+        vector<vector<int>> ans(grid.size(),vector<int>(grid[0].size(),INT_MAX));
         int n=grid.size();
-        for(int i=0;i<grid.size();i++)
+        int m=grid[0].size();
+        for(int i=0;i<n;i++)
         {
-            for(int j=0;j<grid[0].size();j++)
+            for(int j=0;j<m;j++)
             {
                 if(grid[i][j]==1)
+                {
+                    ans[i][j]=0;
                     q.push({i,j});
-                
+                }
             }
         }
-        if(q.size()==0 || q.size()== (n*n))
-            return -1;
-        vector<pair<int,int>> dir={{1,0},{0,1},{-1,0},{0,-1}};
-        int cnt=0;
+        vector<pair<int,int>> dir={{0,1},{1,0},{-1,0},{0,-1}};
         while(!q.empty())
         {
-            cnt++;
-            int s=q.size();
-            while(s--)
-            {
             int i=q.front().first;
             int j=q.front().second;
             q.pop();
-           
             for(auto it:dir)
             {
                 int newx=i+it.first;
                 int newy=j+it.second;
-                if(newx>=0 && newx<grid.size() && newy>=0 && newy<grid[0].size() && grid[newx][newy]==0)
+                if(newx>=0 && newx<n && newy>=0 && newy<m )
                 {
-                    q.push({newx,newy});
-                    grid[newx][newy]=1;
+                    if(ans[newx][newy]>ans[i][j]+1)
+                    {
+                        ans[newx][newy]=ans[i][j]+1;
+                        q.push({newx,newy});
+                    }
+                    
                 }
-                
             }
             
         }
+        int mx=0;
+        for(int i=0;i<n;i++)
+        {
+            for(int j=0;j<m;j++)
+            {
+                mx=max(mx,ans[i][j]);
+            }
         }
-        return cnt-1;
+        if(mx==INT_MAX || mx==0)
+            return -1;
+        else
+            return mx;
         
     }
 };
