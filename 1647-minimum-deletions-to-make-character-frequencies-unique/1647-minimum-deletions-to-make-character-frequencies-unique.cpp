@@ -8,11 +8,7 @@ public:
             m[s[i]]++;
         }
         int cnt=0;
-        /*for(auto i:m)
-        {
-            cout<<i.first<<" "<<i.second;
-            cout<<endl;
-        }*/ 
+       
         vector<int> v(1000000,0);
         for(auto i:m)
         {
